@@ -1,0 +1,114 @@
+<!DOCTYPE html> <!-- Level 1 - Task 2: Internship-->
+<!-- by Rutvika Ashtekar -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Level 1 - Task 2</title>
+  <style>
+
+  body {
+  background: linear-gradient(135deg, #a3e8ca 0%, #FFEDD5 100%);
+  font-family: Arial, sans-serif;
+  color: #334155;
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 45px;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #334155;
+  color: white;
+  transition: background 0.2s ease;
+  display: inline-block;
+  margin: 5px auto;
+}
+button:hover {
+  background: #1e293b;
+}
+input[type="number"] {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  width: 110px;
+  font-size: 15px;
+  margin: 0 5px;
+  text-align: center;
+}
+
+#result {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 15px;
+  color: #0d9488;
+}
+  </style>
+</head>
+<body>
+
+  <h2>Click to Change Color</h2>
+  <button id="colorBtn">Click me</button>
+
+<h2>Greeting Based on Time</h2>
+<button id="greetBtn">Show greeting</button>
+
+<h2>Quick Add Calculator</h2>
+<input type="number" id="num1" placeholder="Number 1">
++
+<input type="number" id="num2" placeholder="Number 2">
+<button id="calcBtn">Add</button>
+<p id="result"></p>
+  <script>
+    const colorBtn = document.getElementById("colorBtn");
+
+const colors = [
+  "#0D9488", "#22A06B", "#3B82F6", "#6366F1", "#8B5CF6", "#EC4899", "#F59E0B"  
+];
+
+let colorIndex = 0;
+
+colorBtn.addEventListener("click", function() {
+  colorIndex = (colorIndex + 1) % colors.length;
+  colorBtn.style.backgroundColor = colors[colorIndex];
+});
+const greetBtn = document.getElementById("greetBtn");
+
+greetBtn.addEventListener("click", function() {
+const now = new Date();
+const hour = now.getHours();
+
+let greeting;
+
+if (hour < 12) {
+  greeting = "Good morning!";
+} else if (hour < 18) {
+  greeting = "Good afternoon!";
+} else {
+  greeting = "Good evening!";
+}
+alert(greeting);
+});
+const calcBtn = document.getElementById("calcBtn");
+
+calcBtn.addEventListener("click", function() {
+  const num1 = Number(document.getElementById("num1").value);
+  const num2 = Number(document.getElementById("num2").value);
+  const sum = num1 + num2;
+  document.getElementById("result").textContent = "Result: " + sum;
+});
+  </script>
+
+</body>
+</html>

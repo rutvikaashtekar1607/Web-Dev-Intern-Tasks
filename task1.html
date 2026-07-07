@@ -1,0 +1,125 @@
+<!DOCTYPE html>  <!-- Level 3 - Task 1: Internship-->
+<!-- by Rutvika Ashtekar -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level 3 - Task 1: Image Manipulation</title>
+
+<style>
+  body { font-family: Arial, sans-serif; padding: 30px; max-width: 800px; margin: 0 auto; background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%); color: #134E4A; }
+  section { margin-bottom: 50px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  h2 { margin-bottom: 15px; font-size: 28px; color: #134E4A; border-bottom: 2px solid #99F6E4; padding-bottom: 8px; }
+
+  .gallery { 
+    display: flex; 
+    gap: 16px; 
+    flex-wrap: wrap; 
+    justify-content: center;
+  }
+  .gallery img {
+  width: 220px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border: 1px solid #E2E8F0;
+}
+  .gallery img:hover { transform: scale(1.05); }
+
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  .lightbox img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 8px;
+  }
+  .lightbox.active { display: flex; }
+
+  .slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 330px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 0 auto;
+  }
+  .slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0; left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  .slideshow img.active { opacity: 1; }
+</style>
+</head>
+<body>
+<h1 style="text-align:center; color:#334155; margin-bottom: 10px;">Cognifyz Web Development — Level 3 Task 1</h1>
+<p style="text-align:center; color:#6B7280; margin-bottom: 40px;">Image Manipulation: Gallery & Slideshow</p>
+  <section>
+    <h2>Gallery</h2>
+    <div class="gallery" id="gallery">
+      <img src="images/gallery-1.jpg" data-full="images/gallery-1.jpg">
+      <img src="images/gallery-2.jpg" data-full="images/gallery-2.jpg">
+      <img src="images/gallery-3.jpg" data-full="images/gallery-3.jpg">
+      </div>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" id="lightboxImg" alt="Enlarged view">
+  </div>
+
+  <section>
+    <h2>Slideshow</h2>
+    <div class="slideshow" id="slideshow">
+      <img src="images/slide-1.jpg" class="active">
+      <img src="images/slide-2.jpg">
+      <img src="images/slide-3.jpg">
+    </div>
+  </section>
+
+  <script>
+    const galleryImgs = document.querySelectorAll("#gallery img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    galleryImgs.forEach(function (img) {
+      img.addEventListener("click", function () {
+        lightboxImg.src = img.dataset.full;
+        lightbox.classList.add("active");
+      });
+    });
+
+    lightbox.addEventListener("click", function () {
+      lightbox.classList.remove("active");
+    });
+
+    const slides = document.querySelectorAll("#slideshow img");
+    let currentSlide = 0;
+
+    function nextSlide() {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add("active");
+      }
+
+    setInterval(nextSlide, 3000);
+  </script>
+
+</body>
+</html>
